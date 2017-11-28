@@ -272,25 +272,25 @@ negative
 
 
 
-## Exposing an app via your snap!
+## Uwidocznienie naszej aplikacji przez snapa!
 Duration: 3:00
 
 
 positive
-: Lost or starting from here?
-Check or download [here][here4] to see what your current directory should look like.
+: Zaczynasz stąd lub zgubiłeś/aś się?
+Sprawdź lub pobierz [tutaj][here4], aby zobaczyć jak obecnie powinien wyglądać Twój katalog.
 
 
-### Defining commands
+### Definiowanie poleceń
 
-In order for services and commands to be exposed to users, you need to specify them in `snapcraft.yaml` of course! This will take care of a couple of things for you:
+Aby udostępnić usługi i polecenia użytkownikom z musimy określić je w pliku `snapcraft.yaml`! musimy uwzględnić kilka rzeczy:
 
-  - It will make sure that services are automatically started/stopped.
-  - All commands will be namespaced, so that you could for example install the same snap from different publishers and still be able to run the snaps separately.
-  - You can define which security permissions commands and services need.
-  - And more.
+  - Usługi będą automatycznie włączane/wyłączane.
+  - Polecenia będą częścią przestrzeni nazwz więc możesz np. zainstalować tego samego snapa od różnych wydawców i niech będą one na siebie „nachodziły”.
+  - Możesz ustalić, jakich uprawnień będą wymagać polecenia i usługi.
+  - I nie tylko…
 
-Exposing the `hello` command is pretty painless, so let’s do that first. All you need to do, is to add the following declaration to your `snapcraft.yaml` file:
+Udostępnienie polecenia `hello` będzie bardzo proste, więc zróbmy to. Wszystko co musisz zrobić to dodanie do pliku `snapcraft.yaml`:
 
 
 ```bash
@@ -299,18 +299,18 @@ apps:
     command: bin/hello
 ```
 
-This defines an app named `hello`, which points to the executable `bin/hello` in the directory structure shipped by the snap.
-This way, the `hello` command will be available to our users.
+W ten sposób definiujemy aplikację `hello`, która wskazuje na plik wykonywalny `bin/hello` w strukturze plików snapa.
+W ten sposób polecenie `hello` będzie dostępne dla użytkowników.
 
-We generally advise to put this stanza after the snap description one (with name, version, grade…) and before the parts. The order itself doesn’t matter, but it makes your `snapcraft.yaml` more readable. Indeed, you will have that way:
+Zwykle zalecamy umieszczenie tego elementu po opisie snapa (z nazwą, wersją, kanałem…) i przed opisem części. Kolejność nie ma znaczenia, ale czyni plik `snapcraft.yaml` bardziej czytelnym. Wzorcowy plik wygląda tak:
 
-  - General snap info (name, version, grade…)
-  - Commands that you expose (apps)
-  - Build recipes (parts)
+  – Ogólne informacje o snapie (nazwa, wersja, kanał…)
+  – Udostępniane polecenia (programy)
+  – Instrukcje budowania (części)
 
 ### Iterating over your snap
 
-So the command is defined, let’s rebuild the snap to see if it’s working now. Instead of running snapcraft, here’s a technique to quickly iterate over your snap during development:
+Ponieważ zdefiniowaliśmy  polecenie, zbudujmy snapa jeszcze raz aby zobaczyć, czy działa. Zamiast uruchomić snapcraft, wykorzystany sposób na szybkie uruchomienie snapa podczas jego tworzenia:
 
 
 ```bash
@@ -324,15 +324,15 @@ Skipping prime gnu-hello (already ran)
 hello 2.10 mounted from ~/hello/prime
 ```
 
-In the steps above we first tell snapcraft to run the build up until the “prime” step. This is where all parts are built and put together for snap creation. Think of it as the extracted contents of the snap package. These we can easily give to `snap try` which installs an unpacked snap into the system for testing purposes. The unpacked snap content continues to be used even after installation, so non-metadata changes (e.g. snap name, etc.) there go live instantly. This makes things a lot quicker and easier to test.
+Kazaliśmy snapcraftowi wykonać wszystkie kroki budowania, aż do kroku „prime”. To tam budowane i łączone są wszystkie części snapów. Tam znajduje się rozpakowana zawartość pakietu snap. Możemy skorzystać z polecenia `snap try`, które zainstaluje niespakowanego snapa na potrzeby testu. Czyni to testowanie prostszym.
 
 
 
 positive
-: Note: The different steps of snapcraft are: **pull** (download source for all parts), **build**, **stage** (consolidate installed files of all parts), **prime** (distill down to just the desired files), **snap** (create a snap out of the prime/ directory). Each steps depends on the previous one to be completed.
+: Zauważ: Kroki wykonywane przez snapcrafta to: **pull** (pobieranie źródeł dla wszystkich elementów), **build** (budowa), **stage** (linkowanie zainstalowanych części), **prime** (usunięcie niepotrzebnych plików), **snap** (utworzenie snapa z zawartości katalogu prime/). Każdy krok wymaga ukończenia poprzedniego kroku.
 
 
-Things should be working now, right?
+To powinno zacząć działać, prawda?
 
 
 ```bash
@@ -342,22 +342,22 @@ Hello, world!
 /snap/bin/hello
 ```
 
-Well done! Congratulations - this is your first working snap!
+Gratuluję! Udało Ci się utworzyć pierwszego snapa!
 
 
 negative
-: Important: If **hello** does not run and you get the error `cannot change current working directory to the original directory: No such file or directory` then most likely you are developing the snap in a directory other than your home directory (despite what recommended in the first step). An example of a directory that would generate this error, is the `/tmp/` directory. Fixing it is possible by uninstalling the snap with `snap remove hello` and start over in your home directory or any subfolder.
+: Ważne: Jeżeli **hello** nie działa lub wyświetla się błąd `cannot change current working directory to the original directory: No such file or directory`, prawdopodobnie snap został utworzony poza katalogiem domowym (pamiętam o zaleceniu z pierwszego kroku). Przykładem katalogu, w którym nie możesz utworzyć snapa jest `/tmp/`. Możesz naprawić to odinstalowując snapa poleceniem `snap remove hello` i zaczynając ponownie w dowolnym miejscu w katalogu domowym.
 
-## A snap is made of parts
+## Snap składający się z wielu elementów
 Duration: 3:00
 
 
 positive
-: Lost or starting from here?
-Check or download [here][here1] to see what your current directory should look like.
+: Zgubiłeś/aś się lub zaczynasz stąd?
+Sprawdź lub pobierz [tutaj][here1] obecną zawartość katalogu.
 
 
-Let’s add another part to make the snap a bit more interesting. In the parts definition, add a new part:
+Dodajmy teraz kolejny element, aby uczynić naszego snapa trochę bardziej interesującym. W definicji części, dodaj:
 
 
 ```bash
@@ -368,8 +368,8 @@ parts:
 	plugin: autotools
 ```
 
-You will notice that this part (named `gnu-bash`) works very much like the `gnu-hello` part from the steps before. It downloads a tarball too and builds it using the `autotools` plugin.
-You learned this during the step before, we still need to define the command we want to expose. Let’s do this now. In the `apps` definition, add:
+Zauważ, że ten element (o nazwie `gnu-bash`) wygląda prawie jak `gnu-hello` z poprzednich kroków. Również pobiera on tarball i używa wtyczki `autotools`.
+Z poprzedniego kroku wiesz, że musisz określić aplikację, aby udostępnić ją użytkownikom Twojego snapa. Zróbmy to. Do definicji aplikacji dodajmy:
 
 
 ```bash
@@ -379,24 +379,24 @@ apps:
 	command: bash
 ```
 
-This time the command name is different from the snap name. By default, all commands are exposed to the user as `<snap-name>.<command-name>`. This binary will thus be `hello.bash`. That way we will avoid a clash with `/bin/bash` (system binaries trump binaries shipped by snaps) or any other snaps shipping a `bash` command. However, maybe you remember, the first binary is simply named `hello`. This is due to the simplification when <command-name> equals <snap-name>. Instead of `hello.hello`, we have the command condensed to simply `hello`.
+Tym razem, nazwa polecenia jest inna od nazwy snapa. Domyślnie wszystkie polecenia są dostępne dla użytkownika jako `<nazwa-snapa>.<polecenie>`. Ta aplikacja będzie dostępna jako `hello.bash`, aby uniknąć konfliktu z systemowym `/bin/bash` lub innym snapem zawierającym polecenie `bash`. Jednak, jak pewnie pamiętasz, pierwszy program jest nazwany po prostu `hello`. Dzieje się tak, gdy <polecenie> jest równe <nazwa-snapa>. Zamiast `.hello.hello` używany więc prostszego `hello`.
 
-Our snap will thus result in two binaries being shipped: `hello` and `hello.bash`.
+Nasz snap będzie dostarczał teraz dwa programy: `hello` i `hello.bash`.
 
-You will note that we set here “`bash`” as the command parameter, and not “`bin/bash`” relative to `$SNAP` as we did for “`hello`”. Both are totally valid. Why is that? `snapcraft` and `snapd` are creating a small wrapper around your executable command setting some environment variables for you, and overriding them. Technically, `$SNAP/bin` is prepending to your `$PATH` for this snap. And thus, the command is reachable, preventing the need to set the path explicitly. We will discuss more on those environment variables in the next sections, once we build our snap.
+Zauważ, że jako polecenie wprowadziliśmy „`bash`”, nie „`bin/bash`”, jak przy `$SNAP` dla „`hello`”. Oba rozwiązania są prawidłowego. Dlaczego? `snapcraft` i `snapd` opanowują Twoje polecenia, tworząc pewne zmienne środowiskowe za Ciebie. technicznie, `$SNAP/bin` jest Twoim `$PATH` w tym snapie. Dzięki temu, polecenie jest dostępne, mimo braku wyraźnego wskazania na nie. Opiszemy więcej zmiennych środowiskowych w następnych krokach, gdy zbudujemy snapa.
 
-Now execute:
+Teraz wykonaj:
 
 
 ```bash
 ~/hello$ snapcraft prime
 ```
 
-to run the build. Only the gnu-bash part needs to be built now (as nothing changed in the other part), which should be relatively quick.
+aby rozpocząć budowę. Tylko element gnu-bash musi zostać zbudowany (nic nie zmieniło się w pozostałych), co potrwa względnie szybko.
 
-### Our first build failure
+### Nasze pierwsze niepowodzenie
 
-Oh no! The build stops with:
+O nie! Budowanie nie powiodło się:
 
 
 ```bash
@@ -404,12 +404,12 @@ Parts 'gnu-bash' and 'gnu-hello' have the following file paths in common which h
 share/info/dir
 ```
 
-What does this mean? Both our `gnu-hello` and `gnu-bash` parts want to ship a version of  `share/info/dir` with differing contents. As this clashes, we have to solve this somehow. In general, there are two options in cases like this:
+Co to oznacza? Zarówno element `gnu-hello`, jak i `gnu-bash` chcą dostarczyć  `share/info/dir` o innej zawartości. Musimy zapobiec temu zderzeniu. Zwykle mamy w takim przypadku dwie opcje:
 
-  - Shipping only one from one of the two parts. If we find the file is not needed or they’re identical, we can tell snapcraft not to ship either using the `snap` and `stage` keywords.
-  - We move one of the files to a different location.
+  – Udostępnienie tylko jednego pliku z jednej z tych części. Jeżeli uznamy ten plik za niepotrzebny lub jest identyczny w obu przypadkach, możemy nakazać snapcraftowi nie używać jednego z nich, używając słów kluczowych `snap` i `stage`.
+  – Przeniesienie jednego z tych plików do innego położenia.
 
-Luckily the second option is easy to implement and it’s nice being able to ship both. The `./configure` script of bash comes with an `--infodir` option, which will set the new location of the info directory. Let’s use `/var/bash/info`. All you need to do is make your gnu-bash definition look like this:
+Na szczęście, drugie rozwiązanie jest proste w implementacj i dobrze jest uwzględnić oba pliki. The `./configure` script of bash comes with an `--infodir` option, which will set the new location of the info directory. Let’s use `/var/bash/info`. All you need to do is make your gnu-bash definition look like this:
 
 
 
