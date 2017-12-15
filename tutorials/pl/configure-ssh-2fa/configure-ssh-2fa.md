@@ -23,7 +23,7 @@ SSH (ang. *secure shell*) jest rozwiązaniem często wykorzystywanym, aby uzyska
 
 Uwierzytelnianie wielopoziomowe jest metodą potwierdzania tożsamości wykorzystującą więcej niż jedną metodę uwierzytelniania. Najczęstszy przykład uwierzytelniania dwuetapowego wykorzystuje połączenie **hasła** i **jednorazowego kodu** generowanego przez specjalną aplikację mobilną.
 
-Wykorzystamy aplikację Google Authenticator dostępną na Androida (w [Sklepie Play]) i iOS (w [iTunes]) służącą do generowania kodów jednorazowych.
+Wykorzystamy aplikację Google Authenticator dostępną na Androida (w [Sklepie Play]) i iOS (w [App Store]) służącą do generowania kodów jednorazowych.
 
 ### Czego potrzebujesz
 
@@ -48,7 +48,7 @@ sudo apt install libpam-google-authenticator
 
 ### Konfiguracja SSH
 
-Aby SSH korzystało z modułu PAM Google Authenticatora, Dodaj następujący wiersz do pliku /etc/pam.d/sshd:
+Aby SSH korzystało z modułu PAM Google Authenticatora, dodaj następujący wiersz do pliku /etc/pam.d/sshd:
 
 ```
 auth required pam_google_authenticator.so
@@ -131,7 +131,7 @@ Jeżeli potrzebujesz więcej pomocy dotyczącej uwierzytelniania dwustopniowego,
 
 <!-- LINKS -->
 [Sklepie Play]: https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2
-[iTunes]: https://itunes.apple.com/us/app/google-authenticator/id388497605
+[App Store]: https://itunes.apple.com/us/app/google-authenticator/id388497605
 [askubuntu]: https://askubuntu.com/
 [forums]: https://ubuntuforums.org/
 [ubuntuirc]: https://wiki.ubuntu.com/IRC/ChannelList
