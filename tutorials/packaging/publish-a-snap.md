@@ -3,7 +3,7 @@ id: publish-a-snap
 summary: We are going to use snapcraft and its dashboard to make our snap available for bigger audience.
 categories: packaging
 status: published
-tags: snapcraft, usage, publishing, beginner
+tags: snapcraft, usage, publishing, beginner, gci, hidden
 difficulty: 1
 published: 2017-12-07
 feedback_url: https://github.com/canonical-websites/tutorials.ubuntu.com/issues
