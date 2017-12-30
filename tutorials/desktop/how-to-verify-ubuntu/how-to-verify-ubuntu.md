@@ -16,6 +16,8 @@ author: Canonical Web Team <webteam@canonical.com>
 ## Getting started
 Duration: 0:02
 
+: Switch language: EN | [PL](tutorial/tutorial-how-to-verify-ubuntu-pl)
+
 positive
 : Note - You will need to use a terminal app to verify an Ubuntu ISO image. These instructions assume basic knowledge of the command line, checking of SHA256 checksums and use of GnuPG.
 
